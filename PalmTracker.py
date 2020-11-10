@@ -5,6 +5,8 @@ import numpy as np
 
 # global variables
 bg = None
+# get the reference to the webcam
+camera = cv2.VideoCapture(0)
 
 
 def run_avg(image, aWeight):
@@ -46,9 +48,6 @@ def segment(image, threshold=25):
 def main():
     # initialize weight for running average
     aWeight = 0.5
-
-    # get the reference to the webcam
-    camera = cv2.VideoCapture(0)
 
     # region of interest (ROI) coordinates
     top, right, bottom, left = 10, 350, 225, 590
@@ -105,7 +104,7 @@ def main():
                     if start_recording:
 
                         # Mention the directory in which you wanna store the images followed by the image name
-                        cv2.imwrite("Dataset/FistTest/fist_" +
+                        cv2.imwrite("TestDS/AImg/AImg_" +
                                     str(image_num) + '.png', thresholded)
                         image_num += 1
                     cv2.imshow("Thesholded", thresholded)
@@ -123,7 +122,7 @@ def main():
             keypress = cv2.waitKey(1) & 0xFF
 
             # if the user pressed "q", then stop looping
-            if keypress == ord("q") or image_num > 100:
+            if keypress == ord("q") or image_num > 1000:
                 break
 
             if keypress == ord("s"):
